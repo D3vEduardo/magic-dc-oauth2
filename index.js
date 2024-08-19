@@ -12,25 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = getCode;
+exports.getCode = getCode;
 exports.fetchUserData = fetchUserData;
 const axios_1 = __importDefault(require("axios"));
 function getCode(clientId, clientSecret, code, redirectUri) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const res = yield axios_1.default.post("https://discord.com/api/oauth2/token", {
-                client_id: clientId,
-                client_secret: clientSecret,
-                code,
-                redirect_uri: redirectUri,
-                grant_type: 'authorization_code',
+            const params = new URLSearchParams();
+            params.append("client_id", clientId);
+            params.append("client_secret", clientSecret);
+            params.append("code", code);
+            params.append("redirect_uri", redirectUri);
+            params.append("grant_type", "authorization_code");
+            const res = yield axios_1.default.post("https://discord.com/api/oauth2/token", params, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
             });
             const { access_token } = res.data;
             return access_token;
         }
         catch (err) {
             console.log("Ocorreu um erro ao obter o token: ", err);
-            return undefined;
+            return null;
         }
     });
 }
@@ -43,6 +47,7 @@ function fetchUserData(access_token) {
             const res = yield axios_1.default.get("https://discord.com/api/users/@me", {
                 headers: { Authorization: `Bearer ${access_token}` },
             });
+            return res.data;
         }
         catch (err) {
             console.log("Ocorreu um erro ao pegar os dados do usuário: ", err);

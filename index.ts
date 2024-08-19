@@ -1,22 +1,30 @@
 import axios from "axios";
 
-export default async function getCode(clientId: string, clientSecret: string, code: string, redirectUri: string): Promise<string | undefined> {
+export async function getCode(clientId: string, clientSecret: string, code: string, redirectUri: string): Promise<string | null> {
 
   try {
+
+    const params = new URLSearchParams();
+    params.append("client_id", clientId);
+    params.append("client_secret", clientSecret);
+    params.append("code", code);
+    params.append("redirect_uri", redirectUri);
+    params.append("grant_type", "authorization_code")
+;
     const res = await axios.post(
       "https://discord.com/api/oauth2/token",
+      params,
       {
-        client_id: clientId,
-        client_secret: clientSecret,
-        code,
-        redirect_uri: redirectUri,
-        grant_type: 'authorization_code',
-      });
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }  
+    );
     const { access_token } = res.data;
     return access_token;
   } catch (err) {
     console.log("Ocorreu um erro ao obter o token: ", err);
-    return undefined;
+    return null;
   }
 }
 
@@ -28,6 +36,7 @@ export async function fetchUserData(access_token: string) {
     const res = await axios.get("https://discord.com/api/users/@me", {
       headers: { Authorization: `Bearer ${access_token}` },
     });
+    return res.data;
   } catch (err) {
     console.log("Ocorreu um erro ao pegar os dados do usuário: ", err);
     return null;
