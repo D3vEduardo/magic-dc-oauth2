@@ -56,12 +56,12 @@ obterDadosUsuario(accessToken);
 `getCode(clientId: string, clientSecret: string, code: string, redirectUri: string): Promise<string | null>`
 Troca o código de autorização por um token de acesso. Retorna o token de acesso ou null em caso de erro.
 
-## * Parâmetros:
+##* Parâmetros:
 * clientId (string): O ID do cliente fornecido pelo Discord.
 * clientSecret (string): O segredo do cliente.
 * code (string): O código de autorização recebido.
 * redirectUri (string): O URI de redirecionamento registrado.
-### * Retorno: Uma `Promise` com o token de acesso (string) ou `null`.
+###* Retorno: Uma `Promise` com o token de acesso (string) ou `null`.
 
 fetchUserData(access_token: string): Promise<UserResponse | null>
 Obtém as informações do usuário autenticado com base no token de acesso fornecido.
