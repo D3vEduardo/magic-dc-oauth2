@@ -67,14 +67,13 @@ Troca o código de autorização por um token de acesso. Retorna o token de aces
 Obtém as informações do usuário autenticado com base no token de acesso fornecido.
 
 * Parâmetros:
-
   * access_token (string): O token de acesso OAuth2.
 *Retorno: Uma Promise com os dados do usuário (objeto UserResponse) ou null.
 
-Interface UserResponse
-A interface UserResponse descreve os dados retornados pela API do Discord:
+## Interface `UserResponse`
+A interface `UserResponse` descreve os dados retornados pela API do Discord:
 
-ts
+```ts
 Copiar código
 interface UserResponse {
   id: string;
@@ -89,8 +88,9 @@ interface UserResponse {
   verified?: boolean;
   email?: string;
 }
-Exceções Tratadas
+```
+## Exceções Tratadas
 A biblioteca trata erros ao obter o token de acesso ou os dados do usuário e exibe mensagens de erro no console.
 
-Licença
+## Licença
 Este projeto é licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
