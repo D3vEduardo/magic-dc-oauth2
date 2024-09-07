@@ -28,7 +28,21 @@ export async function getCode(clientId: string, clientSecret: string, code: stri
   }
 }
 
-export async function fetchUserData(access_token: string) {
+export interface UserResponse {
+  id: string;
+  username: string;
+  discriminator: string;
+  avatar: string | null;
+  bot?: boolean;
+  banner?: string | null;
+  accent_color?: number | null;
+  locale?: string;
+  mfa_enabled?: boolean;
+  verified?: boolean;
+  email?: string;
+}
+
+export async function fetchUserData(access_token: string): Promise<UserResponse | null> {
   try {
     if (!access_token) {
       throw new Error("Token não encontrado");
