@@ -5,7 +5,6 @@
 Primeiro, instale a biblioteca `magic-dc-oauth2`:
 
 ```bash
-Copiar código
 npm install magic-dc-oauth2
 ```
 ## Uso
@@ -13,7 +12,6 @@ npm install magic-dc-oauth2
 Utilize a função `getCode` para trocar o código de autorização por um token de acesso.
 
 ```ts
-Copiar código
 import { getCode } from 'magic-dc-oauth2';
 
 const clientId = 'seu_client_id';
@@ -36,7 +34,6 @@ obterToken();
 Use a função `fetchUserData` para obter informações do usuário autenticado com base no token de acesso.
 
 ```ts
-Copiar código
 import { fetchUserData } from 'magic-dc-oauth2';
 
 async function obterDadosUsuario(token: string) {
@@ -74,7 +71,6 @@ Obtém as informações do usuário autenticado com base no token de acesso forn
 A interface `UserResponse` descreve os dados retornados pela API do Discord:
 
 ```ts
-Copiar código
 interface UserResponse {
   id: string;
   username: string;
